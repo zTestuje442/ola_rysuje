@@ -71,17 +71,21 @@ Każda strona: własny URL, jeden H1, cena, proces, 5–8 pytań FAQ, galeria z 
 
 | URL | Rola |
 |---|---|
-| `/` | H1 np. „dekoracja.ilustracja – ręcznie rysowane portrety ślubne i na prezent \| Ola Waniek, Lublin”. Pierwszy akapit: kim jest, co robi, gdzie, za ile od |
+| `/` | H1 np. „dekoracja.ilustracja – ręcznie rysowane podziękowania dla rodziców i portrety ze zdjęcia \| Ola Waniek, Lublin”. Pierwszy akapit: kim jest, co robi, gdzie, za ile od |
 | `/podziekowania-dla-rodzicow/` | Najważniejsza strona (tu są popyt i opinie). Pakiety, stroje z dnia ślubu, termin rezerwacji, termin przesłania zdjęć |
-| `/portret-slubny-ze-zdjecia/` | Portret pary, rocznice, odtworzenie starego zdjęcia |
-| `/live-painting-na-weselu/` | Co dokładnie robi, godziny, zasięg i dojazd, cena od, wymagania od sali, 3–5 realizacji z nazwą sali i miejscowości. Bez tej strony AI nie połączy Oli z live paintingiem |
-| `/portret-na-prezent/` | Urodziny, rocznice, Dzień Matki. Akcent „ręcznie rysowany, nie AI” |
+| `/portret-z-zainteresowaniami/` | Portret z pasjami, pracą, zwierzakiem; prezent na urodziny, rocznice, Dzień Matki. Akcent „ręcznie rysowany, nie AI” (zastępuje osobną stronę „portret na prezent”) |
+| `/portret-ze-zdjecia/` | Portret podstawowy: osoba, para, rodzina; ręcznie na tablecie, nie filtr ani AI |
+| `/portret-slubny-pary-mlodej/` | Pamiątka ślubu, rocznica, prezent ślubny, odtworzenie starego zdjęcia |
+| `/live-painting-na-weselu/` | Tylko jeśli Ola potwierdzi, że go robi. Co dokładnie robi, godziny, zasięg i dojazd, cena od, wymagania od sali, 3–5 realizacji z nazwą sali i miejscowości. Bez tej strony AI nie połączy Oli z live paintingiem |
+| `/ilustracje-dla-firm/` | Opcjonalnie (oferta z Behance): ilustracje do książek, reklam, na tekstylia, postacie dla marek |
 | `/cennik/` | Konfigurator ceny: klient wybiera opcje, widzi cenę i wysyła Oli zamówienie lub zapytanie z wybranymi opcjami. Obok tabela cen w HTML (warianty, formaty, wydruki, wysyłka) z tych samych danych |
 | `/jak-zamowic/` | Rezerwacja, umowa, zdjęcia, szkic, poprawki, wydruk/plik, wysyłka, płatność |
 | `/opinie/` | Wybrane opinie z datą i miastem |
 | `/o-mnie/` | Wykształcenie (komunikacja wizualna, PŁ), doświadczenie, liczba portretów, technika, Lublin, zdjęcie przy pracy |
 | `/blog/` | Na start 2–4 poradniki z konkretnymi liczbami (pomysły i ceny podziękowań, czym jest live painting, jak wybrać zdjęcie, portret ręczny vs AI) |
 | `/kontakt/`, regulamin, polityka prywatności | — |
+
+Mapa fraz (30.10.2026): każda podstrona celuje w inną frazę; title do ok. 60 znaków, meta do ok. 155, marka na końcu title. Title, meta i H1 każdej strony są w `makieta/generuj.py`. Zdanie marki (H1 i meta strony głównej, bio Instagrama, Facebook, wizytówka Google, Wesele z klasą): „Ręcznie rysowane podziękowania dla rodziców i portrety ze zdjęcia. Lublin, wysyłka w całej Polsce.”
 
 **Wzorcowe pytania FAQ:** ile kosztuje; ile wcześniej rezerwować; jakie zdjęcia są potrzebne (czy z telefonu); czy rysowane ręcznie czy AI; plik, wydruk czy oprawiony obraz i jaki format; koszt i czas wysyłki, wysyłka za granicę; ile poprawek w cenie; (live) ile trwa, ilu gości zdąży narysować, czego potrzebuje od sali, ile kosztuje dojazd.
 

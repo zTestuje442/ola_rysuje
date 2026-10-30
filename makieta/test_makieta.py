@@ -17,6 +17,8 @@ class Parser(HTMLParser):
         self.linki = []
         self.meta = {}
         self.lang = None
+        self.title = ""
+        self._w_title = False
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -28,6 +30,16 @@ class Parser(HTMLParser):
             self.meta[a["name"]] = a.get("content")
         elif tag == "html":
             self.lang = a.get("lang")
+        elif tag == "title":
+            self._w_title = True
+
+    def handle_endtag(self, tag):
+        if tag == "title":
+            self._w_title = False
+
+    def handle_data(self, data):
+        if self._w_title:
+            self.title += data
 
 
 def strony():
@@ -58,6 +70,19 @@ class TestMakieta(unittest.TestCase):
             self.assertEqual(p.h1, 1, plik)
             self.assertEqual(p.meta.get("robots"), "noindex, nofollow", plik)
             self.assertEqual(p.lang, "pl", plik)
+
+    def test_title_i_meta_unikalne_i_w_limicie(self):
+        tytuly, opisy = set(), set()
+        for plik in strony():
+            p = parsuj(plik)
+            opis = p.meta.get("description") or ""
+            self.assertTrue(0 < len(p.title) <= 65, f"{plik}: title {len(p.title)} znaków")
+            self.assertTrue(0 < len(opis) <= 160, f"{plik}: meta {len(opis)} znaków")
+            self.assertTrue(p.title.endswith("| dekoracja.ilustracja"), plik)
+            self.assertNotIn(p.title, tytuly, plik)
+            self.assertNotIn(opis, opisy, plik)
+            tytuly.add(p.title)
+            opisy.add(opis)
 
     def test_linki_wewnetrzne_dzialaja(self):
         for plik in strony():
