@@ -76,7 +76,7 @@ Każda strona: własny URL, jeden H1, cena, proces, 5–8 pytań FAQ, galeria z 
 | `/portret-z-zainteresowaniami/` | Portret z pasjami, pracą, zwierzakiem; prezent na urodziny, rocznice, Dzień Matki. Akcent „ręcznie rysowany, nie AI” (zastępuje osobną stronę „portret na prezent”) |
 | `/portret-ze-zdjecia/` | Portret podstawowy: osoba, para, rodzina; ręcznie na tablecie, nie filtr ani AI |
 | `/portret-slubny-pary-mlodej/` | Pamiątka ślubu, rocznica, prezent ślubny, odtworzenie starego zdjęcia |
-| `/live-painting-na-weselu/` | Tylko jeśli Ola potwierdzi, że go robi. Co dokładnie robi, godziny, zasięg i dojazd, cena od, wymagania od sali, 3–5 realizacji z nazwą sali i miejscowości. Bez tej strony AI nie połączy Oli z live paintingiem |
+| `/live-painting-na-weselu/` | **Ukryta (decyzja Alka 30.10.2026): Ola jeszcze nie oferuje live paintingu; strona nie jest budowana ani linkowana, dopóki Ola się nie zdecyduje.** Docelowo: co dokładnie robi, godziny, zasięg i dojazd, cena od, wymagania od sali, 3–5 realizacji z nazwą sali i miejscowości. Bez tej strony AI nie połączy Oli z live paintingiem |
 | `/ilustracje-dla-firm/` | Opcjonalnie (oferta z Behance): ilustracje do książek, reklam, na tekstylia, postacie dla marek |
 | `/cennik/` | Konfigurator ceny: klient wybiera opcje, widzi cenę i wysyła Oli zamówienie lub zapytanie z wybranymi opcjami. Obok tabela cen w HTML (warianty, formaty, wydruki, wysyłka) z tych samych danych |
 | `/jak-zamowic/` | Rezerwacja, umowa, zdjęcia, szkic, poprawki, wydruk/plik, wysyłka, płatność |
@@ -104,7 +104,7 @@ Mapa fraz (30.10.2026): każda podstrona celuje w inną frazę; title do ok. 60 
 - **Widgety własne zamiast dynamic tags:** lead usługi, cennik, proces, FAQ, galeria realizacji, opinie, dane kontaktowe. Czytają pola i renderują HTML po stronie serwera. Wystarczy darmowy Elementor.
 - **JSON-LD:** generowany w `wp_head` z tych samych pól co widok.
 - **Uprawnienia:** Ola ma rolę Redaktora bez dostępu do edytora Elementora (Menedżer ról), odchudzone menu admina. Układ ustawia tylko Alek.
-- **Zamówienia (decyzja Alka, 30.10.2026):** bez sklepu, koszyka i WooCommerce, bez zamawiania przez WhatsApp. Konfigurator na `/cennik/` wysyła Oli zamówienie lub zapytanie z opcjami wybranymi przez klienta; Ola sama odzywa się do klienta. Ceny muszą być też w HTML (tabela), bo konfigurator działa w JS. Live painting: zapytanie o termin.
+- **Zamówienia (decyzja Alka, 30.10.2026):** bez sklepu, koszyka i WooCommerce, bez zamawiania przez WhatsApp. Konfigurator na `/cennik/` wysyła Oli zamówienie lub zapytanie z opcjami wybranymi przez klienta; Ola sama odzywa się do klienta. Ceny muszą być też w HTML (tabela), bo konfigurator działa w JS. Live painting ukryty do decyzji Oli (docelowo: zapytanie o termin).
 
 ### Model danych
 
