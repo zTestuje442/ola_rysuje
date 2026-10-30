@@ -104,7 +104,7 @@ Mapa fraz (30.10.2026): każda podstrona celuje w inną frazę; title do ok. 60 
 - **Widgety własne zamiast dynamic tags:** lead usługi, cennik, proces, FAQ, galeria realizacji, opinie, dane kontaktowe. Czytają pola i renderują HTML po stronie serwera. Wystarczy darmowy Elementor.
 - **JSON-LD:** generowany w `wp_head` z tych samych pól co widok.
 - **Uprawnienia:** Ola ma rolę Redaktora bez dostępu do edytora Elementora (Menedżer ról), odchudzone menu admina. Układ ustawia tylko Alek.
-- **Zamówienia (decyzja Alka, 30.10.2026):** bez sklepu, koszyka i WooCommerce, bez zamawiania przez WhatsApp. Konfigurator na `/cennik/` wysyła Oli zamówienie lub zapytanie z opcjami wybranymi przez klienta; Ola sama odzywa się do klienta. Ceny muszą być też w HTML (tabela), bo konfigurator działa w JS. Live painting ukryty do decyzji Oli (docelowo: zapytanie o termin).
+- **Zamówienia (decyzja Alka, 30.10.2026):** bez sklepu, koszyka i WooCommerce, bez zamawiania przez WhatsApp. Konfigurator na `/cennik/` wysyła Oli zamówienie lub zapytanie z opcjami wybranymi przez klienta; Ola sama odzywa się do klienta. Ceny muszą być też w HTML (tabela), bo konfigurator działa w JS. Live painting ukryty do decyzji Oli (docelowo: zapytanie o termin). Baza konfiguratora (decyzja Alka 30.10.2026): `konfigurator/konfigurator-wordpress.html`; dalsze zmiany rozwijają ten plik.
 
 ### Model danych
 
