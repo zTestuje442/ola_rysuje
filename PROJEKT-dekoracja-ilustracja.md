@@ -76,11 +76,10 @@ Każda strona: własny URL, jeden H1, cena, proces, 5–8 pytań FAQ, galeria z 
 | `/portret-slubny-ze-zdjecia/` | Portret pary, rocznice, odtworzenie starego zdjęcia |
 | `/live-painting-na-weselu/` | Co dokładnie robi, godziny, zasięg i dojazd, cena od, wymagania od sali, 3–5 realizacji z nazwą sali i miejscowości. Bez tej strony AI nie połączy Oli z live paintingiem |
 | `/portret-na-prezent/` | Urodziny, rocznice, Dzień Matki. Akcent „ręcznie rysowany, nie AI” |
-| `/cennik/` | Jedna tabela: warianty, formaty (plik / wydruk A4/A3 / rama), wysyłka |
+| `/cennik/` | Konfigurator ceny: klient wybiera opcje, widzi cenę i wysyła Oli zamówienie lub zapytanie z wybranymi opcjami. Obok tabela cen w HTML (warianty, formaty, wydruki, wysyłka) z tych samych danych |
 | `/jak-zamowic/` | Rezerwacja, umowa, zdjęcia, szkic, poprawki, wydruk/plik, wysyłka, płatność |
 | `/opinie/` | Wybrane opinie z datą i miastem |
 | `/o-mnie/` | Wykształcenie (komunikacja wizualna, PŁ), doświadczenie, liczba portretów, technika, Lublin, zdjęcie przy pracy |
-| `/sklep/` | WooCommerce: karty produktów z wariantami |
 | `/blog/` | Na start 2–4 poradniki z konkretnymi liczbami (pomysły i ceny podziękowań, czym jest live painting, jak wybrać zdjęcie, portret ręczny vs AI) |
 | `/kontakt/`, regulamin, polityka prywatności | — |
 
@@ -88,7 +87,7 @@ Każda strona: własny URL, jeden H1, cena, proces, 5–8 pytań FAQ, galeria z 
 
 **Schema.org (JSON-LD):**
 - Strona główna: `ProfessionalService` + `Person` (Ola Waniek, ilustratorka), `name`, `legalName`, `areaServed: ["Lublin","Polska"]`, `addressLocality: "Lublin"`, `priceRange`, pełne `sameAs` (Instagram, Facebook, katalogi, Pinterest).
-- Strony usług: `Service` z `Offer` (`price`, `priceCurrency: "PLN"`); karty sklepu: `Product` z `Offer`.
+- Strony usług: `Service` z `Offer` (`price`, `priceCurrency: "PLN"`).
 - `FAQPage` na podstronach.
 - `Review`/`AggregateRating` tylko dla opinii zebranych na własnej stronie. Nie kopiować oceny z Wesele z klasą.
 
@@ -101,19 +100,19 @@ Każda strona: własny URL, jeden H1, cena, proces, 5–8 pytań FAQ, galeria z 
 - **Widgety własne zamiast dynamic tags:** lead usługi, cennik, proces, FAQ, galeria realizacji, opinie, dane kontaktowe. Czytają pola i renderują HTML po stronie serwera. Wystarczy darmowy Elementor.
 - **JSON-LD:** generowany w `wp_head` z tych samych pól co widok.
 - **Uprawnienia:** Ola ma rolę Redaktora bez dostępu do edytora Elementora (Menedżer ról), odchudzone menu admina. Układ ustawia tylko Alek.
-- **Sklep:** WooCommerce z produktami wariantowymi (liczba osób, format, wydruk/rama), płatność PayU lub Przelewy24, zdjęcia przesyłane po zakupie. Live painting to nie produkt, tylko formularz zapytania o termin.
+- **Zamówienia (decyzja Alka, 30.10.2026):** bez sklepu, koszyka i WooCommerce, bez zamawiania przez WhatsApp. Konfigurator na `/cennik/` wysyła Oli zamówienie lub zapytanie z opcjami wybranymi przez klienta; Ola sama odzywa się do klienta. Ceny muszą być też w HTML (tabela), bo konfigurator działa w JS. Live painting: zapytanie o termin.
 
 ### Model danych
 
 | Gdzie | Pola edytowane przez Olę |
 |---|---|
 | Strona opcji „Dane pracowni” | Nazwa, e-mail, telefon, miasto, obszar, linki do profili (`sameAs`), liczba portretów, zasady wysyłki |
-| CPT Usługi | Akapit otwierający (2–3 zdania: co, dla kogo, gdzie, za ile), czas realizacji, kroki procesu (repeater), FAQ (repeater), realizacje (relacja), rodzaj CTA (sklep / formularz), cena od (tylko gdy brak produktu) |
+| CPT Usługi | Akapit otwierający (2–3 zdania: co, dla kogo, gdzie, za ile), czas realizacji, kroki procesu (repeater), FAQ (repeater), realizacje (relacja), rodzaj CTA (konfigurator / zapytanie o termin), cena od (tylko usługi spoza konfiguratora, np. live painting) |
 | CPT Realizacje | Zdjęcie, opis (źródło `alt`), okazja, format, miasto lub sala, checkbox „mam zgodę klienta” (bez niego realizacja nie trafia na front) |
 | CPT Opinie | Treść, imię, miasto, data, źródło, zgoda |
-| Produkty WooCommerce | Warianty i ceny |
+| Strona opcji „Cennik” | Ceny bazowe, dopłaty (osoba, pupil), wydruki, wysyłka |
 
-**Cena:** jeśli usługa ma produkt w sklepie, „cena od” jest liczona z WooCommerce i wyświetlana w panelu tylko do odczytu. Ręcznie wpisywana wyłącznie tam, gdzie produktu nie ma (live painting). Nigdy dwa miejsca z tą samą ceną.
+**Cena:** ceny wpisywane w jednym miejscu (strona opcji „Cennik”). Konfigurator, tabela cen, „cena od” na stronach usług i JSON-LD są z niej liczone. Ręcznie wpisywana wyłącznie tam, gdzie usługi nie ma w konfiguratorze (live painting). Nigdy dwa miejsca z tą samą ceną.
 
 ## 8. Plan prac przed napisaniem motywu (kolejność)
 
@@ -125,9 +124,9 @@ Każda strona: własny URL, jeden H1, cena, proces, 5–8 pytań FAQ, galeria z 
    → weryfikacja: każda usługa ma jeden URL, żadna fraza nie jest przypisana do dwóch stron, każdy URL ma typ szablonu.
 3. **Treści i materiały:** teksty od razu w układzie pól (sekcja dokumentu = pole); 8–10 realizacji na usługę z opisem; zgody klientów na wizerunek i opinie (RODO); bio i zdjęcie Oli.
    → weryfikacja: 100% stron ma gotowy tekst, każde zdjęcie ma opis i zgodę, ceny zgodne z briefem.
-4. **Model zamówień i prawo:** decyzja WooCommerce (rekomendacja jak wyżej); regulamin, polityka prywatności (przesyłanie zdjęć = dane osobowe), zapis o odstąpieniu od umowy dla produktów personalizowanych (do weryfikacji przez prawnika lub sprawdzony generator).
-   → weryfikacja: decyzja zapisana, znana lista szablonów WooCommerce do ostylowania, regulamin gotowy.
-5. **Wireframe'y:** 8 typów stron (główna, usługa, karta produktu, cennik, jak zamówić, o mnie, wpis, kontakt), mobile first. Wspólne komponenty: hero z akapitem otwierającym w HTML, blok ceny, proces, FAQ w DOM, galeria, opinie, CTA, stopka z NAP. Plus wireframe'y panelu: formularze 4 encji i strona opcji.
+4. **Model zamówień i prawo:** decyzja: bez sklepu, konfigurator (30.10.2026); regulamin, polityka prywatności (przesyłanie zdjęć = dane osobowe), zapis o odstąpieniu od umowy dla produktów personalizowanych (do weryfikacji przez prawnika lub sprawdzony generator).
+   → weryfikacja: decyzja zapisana, regulamin gotowy.
+5. **Wireframe'y:** 7 typów stron (główna, usługa, cennik z konfiguratorem, jak zamówić, o mnie, wpis, kontakt), mobile first. Wspólne komponenty: hero z akapitem otwierającym w HTML, blok ceny, proces, FAQ w DOM, galeria, opinie, CTA, stopka z NAP. Plus wireframe'y panelu: formularze 4 encji i strona opcji.
    → weryfikacja: każdy URL ma szablon, wireframe'y wypełnione prawdziwą treścią, zaakceptowane przez Olę.
    **5b. Specyfikacja pól:** tabela: pole, typ, wymagane, limit znaków, podpowiedź dla Oli, gdzie się wyświetla, czy trafia do schema.
    → weryfikacja: każdy element z wireframe'u ma źródło w polu albo w stałym tekście motywu.
@@ -148,7 +147,7 @@ Równolegle od tygodnia 1:
 
 - [Specyfikacja pól] → weryfikacja: w szablonach Elementora nie ma treści wpisanej na sztywno.
 - [Jedno źródło] → weryfikacja: zmiana telefonu na stronie opcji widoczna w stopce, w kontakcie i w JSON-LD (Rich Results Test).
-- [Cena] → weryfikacja: zmiana ceny wariantu w WooCommerce zmienia cenę na stronie usługi, w cenniku i w JSON-LD.
+- [Cena] → weryfikacja: zmiana ceny na stronie opcji „Cennik” zmienia cenę w konfiguratorze, na stronie usługi, w tabeli cen i w JSON-LD.
 - [Zgody] → weryfikacja: realizacja bez zaznaczonej zgody nie pojawia się na froncie ani w galerii.
 - [Treść w HTML] → weryfikacja: `curl` strony usługi zwraca cenę i pełny tekst FAQ bez wykonywania JS.
 - [Użyteczność] → weryfikacja: Ola bez instrukcji dodaje pytanie FAQ i nową realizację w mniej niż 5 minut i nie widzi przycisku „Edytuj w Elementorze”.
@@ -188,5 +187,5 @@ Dodatkowo: Google Alerts na nazwę marki; w analityce osobny kanał dla odesła�
 - Czy pracuje wyłącznie na tablecie?
 - Domena: dekolu.pl (status nieznany) czy dekoracjailustracja.pl?
 - Ceny 2027 i jedna liczba wykonanych portretów.
-- Kwestie prawne sklepu (odstąpienie od umowy, RODO przy zdjęciach) do weryfikacji.
-- Do sprawdzenia przy implementacji: obsługa Secure Custom Fields w aktualnej wersji Elementora i WooCommerce oraz zakres darmowego Menedżera ról Elementora.
+- Kwestie prawne zamówień na odległość (odstąpienie od umowy, RODO przy zdjęciach) do weryfikacji.
+- Do sprawdzenia przy implementacji: obsługa Secure Custom Fields w aktualnej wersji Elementora oraz zakres darmowego Menedżera ról Elementora.

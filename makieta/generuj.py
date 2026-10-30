@@ -56,7 +56,7 @@ FAQ_LIVE = [
 ]
 
 
-def strona_uslugi(opis_akapitu, sekcje_wlasne, pytania=FAQ_OGOLNE, cta="Zamów"):
+def strona_uslugi(opis_akapitu, sekcje_wlasne, pytania=FAQ_OGOLNE, cta="Wyceń i zamów", cel="cennik/"):
     """Wspólny układ strony usługi: akapit, cena, sekcje, proces, galeria, opinie, FAQ, CTA."""
     return [
         ("Akapit otwierający", akapit(brak(opis_akapitu))),
@@ -67,7 +67,7 @@ def strona_uslugi(opis_akapitu, sekcje_wlasne, pytania=FAQ_OGOLNE, cta="Zamów")
         ("Realizacje", akapit(brak("galeria realizacji z opisem (alt), tylko za zgodą klienta"))),
         ("Opinie", akapit(brak("opinie z datą i miastem, tylko za zgodą"))),
         ("Najczęstsze pytania", faq(pytania)),
-        ("Zamówienie", akapit(f'<a class="cta" href="{{root}}kontakt/">{escape(cta)}</a>')),
+        ("Zamówienie", akapit(f'<a class="cta" href="{{root}}{cel}">{escape(cta)}</a>')),
     ]
 
 
@@ -85,7 +85,7 @@ STRONY = [
          ])),
          ("Jak zamówić", akapit(brak("skrót procesu") + ' <a href="{root}jak-zamowic/">Więcej</a>')),
          ("Opinie", akapit(brak("wybrane opinie") + ' <a href="{root}opinie/">Wszystkie opinie</a>')),
-         ("Zamówienie", akapit('<a class="cta" href="{root}kontakt/">Napisz do mnie</a>')),
+         ("Zamówienie", akapit('<a class="cta" href="{root}cennik/">Wyceń i zamów</a>')),
      ]),
     ("podziekowania-dla-rodzicow/", "Podziękowania dla rodziców",
      "Podziękowania dla rodziców",
@@ -113,7 +113,7 @@ STRONY = [
          ("Godziny i liczba portretów", akapit(brak("godziny obecności, liczba portretów"))),
          ("Zasięg i dojazd", akapit(brak("Lublin i okolice, dopłata za dojazd"))),
          ("Wymagania od sali", akapit(brak("stolik, gniazdko, inne"))),
-     ], pytania=FAQ_LIVE, cta="Zapytaj o termin")),
+     ], pytania=FAQ_LIVE, cta="Zapytaj o termin", cel="kontakt/")),
     ("portret-na-prezent/", "Portret na prezent",
      "Portret na prezent",
      strona_uslugi("co, dla kogo, gdzie, za ile; ręcznie rysowany, nie AI", [
@@ -123,13 +123,19 @@ STRONY = [
     ("cennik/", "Cennik",
      "Cennik",
      [
-         ("Forma strony", akapit(decyzja("osobna tabela cen czy konfigurator ceny"))),
-         ("Ceny", akapit(brak("warianty, formaty (plik / wydruk / rama), wysyłka; ceny 2027"))),
+         ("Konfigurator ceny", akapit(brak(
+             "konfigurator: klient wybiera opcje i widzi cenę, potem wysyła Oli zamówienie lub zapytanie "
+             "z wybranymi opcjami; pole „Skąd Pani o mnie wie?” z opcją „ChatGPT/AI”"))),
+         ("Ceny", akapit(brak("tabela cen w HTML z tych samych danych co konfigurator: "
+                              "warianty, dopłaty, wydruki, wysyłka; ceny 2027"))),
+         ("Co dalej", akapit("Ola odpowiada na każde zamówienie lub zapytanie: " + brak("w jakim czasie i jak"))),
      ]),
     ("jak-zamowic/", "Jak zamówić",
      "Jak zamówić",
      [
          ("Krok po kroku", lista([
+             'Wybór opcji w <a href="{root}cennik/">konfiguratorze</a> i wysłanie zamówienia lub zapytania',
+             "Kontakt od Oli: " + brak("w jakim czasie i jak"),
              "Rezerwacja terminu: " + brak("opis"),
              "Umowa: " + brak("opis"),
              "Kwestionariusz: " + brak("opis"),
@@ -150,9 +156,6 @@ STRONY = [
          ("Ola Waniek", akapit(brak("wykształcenie, doświadczenie, liczba portretów, technika, Lublin"))),
          ("Przy pracy", akapit(brak("zdjęcie Oli przy pracy z opisem"))),
      ]),
-    ("sklep/", "Sklep",
-     "Sklep",
-     [("Produkty", akapit(decyzja("sklep WooCommerce czy zamówienie przez konfigurator")))]),
     ("blog/", "Blog",
      "Blog",
      [("Wpisy", akapit(brak("2–4 poradniki na start")))]),
@@ -164,7 +167,7 @@ STRONY = [
              "Telefon: " + brak("telefon"),
              "Pracownia: Lublin, wysyłka w całej Polsce",
          ])),
-         ("Formularz", akapit(brak("formularz kontaktowy; pole „Skąd Pani o mnie wie?” z opcją „ChatGPT/AI”"))),
+         ("Formularz", akapit(decyzja("osobny formularz kontaktowy (np. live painting) czy tylko e-mail i telefon"))),
      ]),
     ("regulamin/", None,
      "Regulamin",
