@@ -47,14 +47,6 @@ FAQ_OGOLNE = [
     "Ile poprawek jest w cenie?",
 ]
 
-FAQ_LIVE = [
-    "Ile kosztuje live painting na weselu?",
-    "Ile trwa malowanie na weselu?",
-    "Ilu gości zdążysz narysować?",
-    "Czego potrzebujesz od sali?",
-    "Ile kosztuje dojazd poza Lublin?",
-]
-
 
 def strona_uslugi(opis_akapitu, sekcje_wlasne, pytania=FAQ_OGOLNE, cta="Wyceń i zamów", cel="cennik/"):
     """Wspólny układ strony usługi: akapit, cena, sekcje, proces, galeria, opinie, FAQ, CTA."""
@@ -94,7 +86,6 @@ STRONY = [
                    '<a href="{root}portret-z-zainteresowaniami/">Portret z zainteresowaniami</a>',
                    '<a href="{root}portret-ze-zdjecia/">Portret ze zdjęcia</a>',
                    '<a href="{root}portret-slubny-pary-mlodej/">Portret ślubny pary młodej</a>',
-                   '<a href="{root}live-painting-na-weselu/">Live painting na weselu</a>',
                    '<a href="{root}ilustracje-dla-firm/">Ilustracje dla firm</a>',
                ])),
                ("Jak zamówić", akapit(brak("skrót procesu") + ' <a href="{root}jak-zamowic/">Więcej</a>')),
@@ -144,17 +135,6 @@ STRONY = [
                    "Odtworzenie starego zdjęcia ślubnego: " + brak("opis"),
                ])),
            ])),
-    strona("live-painting-na-weselu/", "Live painting",
-           f"Live painting na weselu, Lublin | {MARKA}",
-           "Maluję na żywo podczas Waszego wesela – goście widzą, jak powstaje pamiątka. "
-           "Lublin i okolice, dojazd w całej Polsce. Sprawdź wolne terminy na 2027.",
-           strona_uslugi("co dokładnie robi Ola na weselu, gdzie, za ile", [
-               ("Status oferty", akapit(decyzja("strona tylko jeśli Ola potwierdzi, że robi live painting"))),
-               ("Jak to wygląda", akapit(brak("technika: tablet z wydrukiem czy media tradycyjne"))),
-               ("Godziny i liczba portretów", akapit(brak("godziny obecności, liczba portretów"))),
-               ("Zasięg i dojazd", akapit(brak("Lublin i okolice, dopłata za dojazd"))),
-               ("Wymagania od sali", akapit(brak("stolik, gniazdko, inne"))),
-           ], pytania=FAQ_LIVE, cta="Zapytaj o termin", cel="kontakt/")),
     strona("ilustracje-dla-firm/", "Ilustracje dla firm",
            f"Ilustracje dla firm na zamówienie | {MARKA}",
            "Ilustracje do książek, materiałów reklamowych i na tekstylia oraz postacie dla marek. "
@@ -167,8 +147,8 @@ STRONY = [
            ]),
     strona("cennik/", "Cennik",
            f"Cennik portretów i podziękowań | {MARKA}",
-           "Aktualne ceny 2027: podziękowania dla rodziców, portrety ze zdjęcia, z zainteresowaniami i ślubne, "
-           "live painting. Formaty, czas realizacji i koszt wysyłki.",
+           "Aktualne ceny 2027: podziękowania dla rodziców, portrety ze zdjęcia, z zainteresowaniami i ślubne. "
+           "Formaty, czas realizacji i koszt wysyłki.",
            [
                ("Konfigurator ceny", akapit(brak(
                    "konfigurator: klient wybiera opcje i widzi cenę, potem wysyła Oli zamówienie lub zapytanie "
@@ -212,23 +192,22 @@ STRONY = [
     strona("blog/", "Blog",
            f"Blog o portretach i podziękowaniach | {MARKA}",
            "Poradniki o ręcznie rysowanych portretach i podziękowaniach dla rodziców: pomysły, ceny, "
-           "wybór zdjęcia i live painting na weselu.",
+           "wybór zdjęcia do portretu.",
            [("Planowane wpisy", lista([
                "Podziękowania dla rodziców na wesele – pomysły i ceny 2027",
-               "Czym jest live painting na weselu i ile kosztuje?",
                "Jak wybrać zdjęcie do portretu na zamówienie?",
            ]))]),
     strona("kontakt/", "Kontakt",
            f"Kontakt i rezerwacja terminu | {MARKA}",
            "Napisz, jaki portret chcesz zamówić i na kiedy. Odpowiadam w ciągu [X] dni. "
-           "Lublin, wysyłka w całej Polsce, live painting na weselach.",
+           "Lublin, wysyłka w całej Polsce.",
            [
                ("Dane kontaktowe", lista([
                    "E-mail: " + brak("e-mail w domenie marki"),
                    "Telefon: " + brak("telefon"),
                    "Pracownia: Lublin, wysyłka w całej Polsce",
                ])),
-               ("Formularz", akapit(decyzja("osobny formularz kontaktowy (np. live painting) czy tylko e-mail i telefon"))),
+               ("Formularz", akapit(decyzja("osobny formularz kontaktowy czy tylko e-mail i telefon"))),
            ]),
     strona("regulamin/", None, f"Regulamin | {MARKA}", f"Regulamin zamówień {MARKA}.",
            [("Treść", akapit(brak("regulamin zweryfikowany przez prawnika")))]),
